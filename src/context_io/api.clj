@@ -56,7 +56,7 @@
                {:account-id \"abcdef\"})
      ; -> \"https://api.context.io/2.0/accounts/abcdef\""
   [uri params]
-  (loop [matches (re-seq #"\{\:(\w+)\}" uri)
+  (loop [matches (re-seq #"\{\:([\w|\-]+)\}" uri)
          ^String result uri]
     (if (empty? matches) result
         (let [[token kw] (first matches)

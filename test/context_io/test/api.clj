@@ -15,4 +15,9 @@
   (is (= (subs-uri
           "accounts/{:id}"
           {:id 123})
+         "accounts/123"))
+
+    (is (= (subs-uri
+          "accounts/{:account-id}"
+          {:account-id 123})
          "accounts/123")))
