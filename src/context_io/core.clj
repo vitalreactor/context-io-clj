@@ -50,7 +50,7 @@
                               :val-trans fix-colls)
         body (:body arg-map)
         query (merge (:query arg-map) params)
-        final-uri (subs-uri uri params)
+        final-uri (subs-uri uri (:params arg-map))
         oauth-map (sign-query (:oauth-creds arg-map)
                               action
                               final-uri
