@@ -140,3 +140,6 @@
 (def-context-io-two-method get-account-webhook :get "accounts/{:account-id}/webhooks/{:webhook-id}")
 (def-context-io-two-method edit-account-webhook :post "accounts/{:account-id}/webhooks/{:webhook-id}")
 (def-context-io-two-method remove-account-webhook :delete "accounts/{:account-id}/webhooks/{:webhook-id}")
+
+;;Accounts -> Exits
+(def-context-io-two-method create-account-exit :post "accounts/{:account-id}/exits/0")
