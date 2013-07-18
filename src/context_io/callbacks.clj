@@ -3,7 +3,8 @@
   (:require
     [clojure.data.json :as json]
     [http.async.client :as ac]
-    [http.async.client.request :as req]))
+    [http.async.client.request :as req])
+  (:use zolo.utils.debug))
 
 (defrecord Callback [on-success on-failure on-exception])
 
@@ -32,7 +33,9 @@
    This will be changed to throwing an exception with more information about
    the error returned."
   [response]
-  (throw (Exception. "An error occured"))) ; TODO: Fix message
+  (let [code (-> response :status deref :code)
+        msg (-> response :status deref :msg)]
+    (throw (Exception. (str code ": " msg))))) ; TODO: Fix message
 
 (defn exception-rethrow
   "Rethrows the exception given.
