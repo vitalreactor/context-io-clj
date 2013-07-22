@@ -3,7 +3,8 @@
   (:require
     [clojure.data.json :as json]
     [http.async.client :as ac]
-    [http.async.client.request :as req])
+    [http.async.client.request :as req]
+    [zolo.utils.logger :as logger])
   (:use zolo.utils.debug))
 
 (defrecord Callback [on-success on-failure on-exception])
@@ -34,8 +35,10 @@
    the error returned."
   [response]
   (let [code (-> response :status deref :code)
-        msg (-> response :status deref :msg)]
-    (throw (Exception. (str code ": " msg))))) ; TODO: Fix message
+        msg (-> response :status deref :msg)
+        e (Exception. (str code ": " msg))]
+    (logger/info (str "ContextIO Error: " (-> response :body deref .toString)))
+    (throw e))) ; TODO: Fix message
 
 (defn exception-rethrow
   "Rethrows the exception given.
