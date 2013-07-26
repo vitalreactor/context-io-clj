@@ -23,7 +23,8 @@
    Returns the return value from the callback that got called."
   [client req callbacks]
   (let [transform #(handle-response (ac/await %) callbacks :events #{:on-success :on-failure :on-exception})
-        response (apply req/execute-request client req (apply concat (emit-callback-list callbacks)))]
+        response (-> (apply req/execute-request client req (apply concat (emit-callback-list callbacks)))
+                     (assoc :request req))]
     (transform response)))
 
 (defn- add-to-req

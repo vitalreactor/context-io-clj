@@ -34,10 +34,16 @@
    This will be changed to throwing an exception with more information about
    the error returned."
   [response]
-  (let [code (-> response :status deref :code)
+  (let [req (-> response :request)
+        code (-> response :status deref :code)
         msg (-> response :status deref :msg)
         e (Exception. (str code ": " msg))]
-    (logger/info (str "ContextIO Error: " (-> response :body deref .toString)))
+    (logger/info (str "ContextIO Error: " (-> response :body deref .toString)
+                      "\nREQUEST:"
+                      "\nMethod:" (.getMethod req)
+                      "\nURL:" (.getUrl req)
+                      "\nParams:" (into {} (.getParams req))
+                      ))
     (throw e))) ; TODO: Fix message
 
 (defn exception-rethrow
