@@ -1,4 +1,4 @@
-(defproject zololabs/context-io-clj "0.1.1"
+(defproject zololabs/context-io-clj "0.1.2"
   :description "Context.IO API wrapper for Clojure"
   :url "https://github.com/zololabs/context-io-clj"
   
