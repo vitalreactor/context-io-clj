@@ -2,8 +2,7 @@
   :description "Context.IO API wrapper for Clojure"
   :url "https://github.com/zololabs/context-io-clj"
   
-  :plugins [[lein-clojars "0.9.1"]
-            [lein-sha-version "0.1.1"]]
+  :plugins [[lein-clojars "0.9.1"]]
 
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [org.clojure/data.json "0.1.2"]
